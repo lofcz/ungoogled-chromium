@@ -94,7 +94,9 @@ PRUNING_EXCLUDE_PATTERNS = [
     '*.js',
     '*.json',
     '*.txt',
-    '*.xtb'
+    '*.xtb',
+    # Extra file extensions
+    '*.tflite'
 ]
 
 # NOTE: Domain substitution path prefix exclusion has precedence over inclusion patterns

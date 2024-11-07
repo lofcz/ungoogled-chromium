@@ -109,10 +109,10 @@ def clone(args): # pylint: disable=too-many-branches, too-many-locals, too-many-
     if iswin:
         (dtpath / 'git.bat').write_text('git')
     # Apply changes to gclient
-    run(['git', 'apply'],
-        input=Path(__file__).with_name('depot_tools.patch').read_text().replace(
-            'UC_OUT', str(args.output)).replace('UC_STAGING',
-                                                str(ucstaging)).replace('GSUVER', gsuver),
+    patch_content = Path(__file__).with_name('depot_tools.patch').read_text().replace(
+        'UC_OUT', str(args.output)).replace('UC_STAGING', str(ucstaging)).replace('GSUVER', gsuver)
+    run(['git', 'apply', '--ignore-whitespace', '--verbose'],
+        input=patch_content,
         cwd=dtpath,
         check=True,
         universal_newlines=True)

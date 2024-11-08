@@ -1,4 +1,9 @@
-def add_patterns_to_file(file_path):
+import os
+
+def add_patterns_to_file():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, 'update_lists.py')
+
     # extra patterns
     new_patterns = [
         '*.tflite',
@@ -43,4 +48,4 @@ def add_patterns_to_file(file_path):
         print("no patch applied - file already patched")
 
 if __name__ == "__main__":
-    add_patterns_to_file('update_lists.py')
+    add_patterns_to_file()

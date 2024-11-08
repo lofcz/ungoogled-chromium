@@ -94,12 +94,12 @@ PRUNING_EXCLUDE_PATTERNS = [
     '*.js',
     '*.json',
     '*.txt',
-    '*.xtb'
+    '*.xtb',
     '*.tflite',
     '*.binarypb',
     '*.pb',
     '*.pbtxt.gz',
-    '*.bin',
+    '*.bin'
 ]
 
 # NOTE: Domain substitution path prefix exclusion has precedence over inclusion patterns
@@ -124,7 +124,6 @@ DOMAIN_INCLUDE_PATTERNS = [
 
 # Binary-detection constant
 _TEXTCHARS = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
-
 
 class UnusedPatterns: #pylint: disable=too-few-public-methods
     """Tracks unused prefixes and patterns"""
@@ -301,30 +300,46 @@ def compute_lists(source_tree, search_regex, processes): # pylint: disable=too-m
     source_tree = source_tree.resolve()
     unused_patterns = UnusedPatterns()
 
+    # fetch all files, this takes some extra time and memory
+    all_files = list(source_tree.rglob('*'))
+    total_files = len(all_files)
+    get_logger().info(f'Found {total_files} files to process')
+    
     # Launch multiple processes iterating over the source tree
     with Pool(processes) as procpool:
-        returned_data = procpool.starmap(
-            compute_lists_proc,
-            zip(source_tree.rglob('*'), repeat(source_tree), repeat(search_regex)))
-
-    # Handle the returned data
-    for (used_pep_set, used_pip_set, used_dep_set, used_dip_set, returned_pruning_set,
-         returned_domain_sub_set, returned_symlink_set) in returned_data:
-        # pragma pylint: disable=no-member
-        unused_patterns.pruning_exclude_patterns.difference_update(used_pep_set)
-        unused_patterns.pruning_include_patterns.difference_update(used_pip_set)
-        unused_patterns.domain_exclude_prefixes.difference_update(used_dep_set)
-        unused_patterns.domain_include_patterns.difference_update(used_dip_set)
-        # pragma pylint: enable=no-member
-        pruning_set.update(returned_pruning_set)
-        domain_substitution_set.update(returned_domain_sub_set)
-        symlink_set.update(returned_symlink_set)
+        # divide into batches
+        batch_size = total_files // 100 # 1% 
+        for i in range(0, total_files, batch_size):
+            batch = all_files[i:i + batch_size]
+            results = procpool.starmap(
+                compute_lists_proc,
+                zip(batch, repeat(source_tree), repeat(search_regex))
+            )
+            
+            # Handle the returned data
+            for result in results:
+                (used_pep_set, used_pip_set, used_dep_set, used_dip_set, 
+                 returned_pruning_set, returned_domain_sub_set, returned_symlink_set) = result
+                
+                unused_patterns.pruning_exclude_patterns.difference_update(used_pep_set)
+                unused_patterns.pruning_include_patterns.difference_update(used_pip_set)
+                unused_patterns.domain_exclude_prefixes.difference_update(used_dep_set)
+                unused_patterns.domain_include_patterns.difference_update(used_dip_set)
+                
+                pruning_set.update(returned_pruning_set)
+                domain_substitution_set.update(returned_domain_sub_set)
+                symlink_set.update(returned_symlink_set)
+            
+            # log progress
+            progress = min(100, (i + batch_size) * 100 // total_files)
+            get_logger().info(f'Progress: {progress}% ({i + len(batch)}/{total_files} files)')
 
     # Prune symlinks for pruned files
     for (resolved, symlink) in symlink_set:
         if resolved in pruning_set:
             pruning_set.add(symlink)
 
+    get_logger().info('Processing completed')
     return sorted(pruning_set), sorted(domain_substitution_set), unused_patterns
 
 

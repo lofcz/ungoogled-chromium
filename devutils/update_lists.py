@@ -96,7 +96,11 @@ PRUNING_EXCLUDE_PATTERNS = [
     '*.txt',
     '*.xtb',
     # Extra file extensions
-    '*.tflite'
+    '*.tflite',
+    '*.binarypb',
+    '*.pb',
+    '*.pbtxt.gz',
+    '*.bin' # todo: scope down
 ]
 
 # NOTE: Domain substitution path prefix exclusion has precedence over inclusion patterns

@@ -95,6 +95,11 @@ PRUNING_EXCLUDE_PATTERNS = [
     '*.json',
     '*.txt',
     '*.xtb'
+    '*.tflite',
+    '*.binarypb',
+    '*.pb',
+    '*.pbtxt.gz',
+    '*.bin',
 ]
 
 # NOTE: Domain substitution path prefix exclusion has precedence over inclusion patterns

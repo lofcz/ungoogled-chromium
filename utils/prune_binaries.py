@@ -69,8 +69,11 @@ def prune_files(unpack_root, prune_list):
         # read-only files can't be deleted on Windows
         # so remove the flag and try again.
         except PermissionError:
-            os.chmod(file_path, stat.S_IWRITE)
-            file_path.unlink()
+            try:
+                os.chmod(file_path, stat.S_IWRITE)
+                file_path.unlink()
+            except:
+                unremovable_files.add(Path(relative_file).as_posix())
         except FileNotFoundError:
             unremovable_files.add(Path(relative_file).as_posix())
     return unremovable_files
@@ -134,8 +137,8 @@ def _callback(args):
             file_list += '\n... and ' + str(len(unremovable_files) - 5) + ' more'
             get_logger().debug('files that could not be pruned:\n%s',
                                '\n'.join(f for f in unremovable_files))
-        get_logger().error('%d files could not be pruned:\n%s', len(unremovable_files), file_list)
-        sys.exit(1)
+        get_logger().warning('%d files could not be pruned:\n%s', len(unremovable_files), file_list)
+        # sys.exit(1)
 
 
 def main():

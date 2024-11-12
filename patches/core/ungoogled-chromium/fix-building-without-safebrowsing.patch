@@ -2911,6 +2911,16 @@
  }
  
  const std::set<ContentSettingsType>
+--- a/chrome/browser/ui/tab_contents/BUILD.gn
++++ b/chrome/browser/ui/tab_contents/BUILD.gn
+@@ -50,7 +50,6 @@ source_set("impl") {
+   if (is_win || is_mac || is_linux || is_chromeos) {
+     sources += [
+       "chrome_web_contents_menu_helper.cc",
+-      "chrome_web_contents_view_handle_drop.cc",
+     ]
+   }
+ 
 --- a/chrome/browser/ui/tab_helpers.cc
 +++ b/chrome/browser/ui/tab_helpers.cc
 @@ -392,7 +392,6 @@ void TabHelpers::AttachTabHelpers(WebCon

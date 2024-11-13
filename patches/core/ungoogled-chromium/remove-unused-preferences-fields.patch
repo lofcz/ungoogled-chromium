@@ -4938,7 +4938,7 @@
        unified_consent::prefs::kUrlKeyedAnonymizedDataCollectionEnabled,
        base::BindRepeating(&RealTimeUrlLookupService::OnPrefChanged,
                            base::Unretained(this)));
-@@ -141,8 +136,7 @@ bool RealTimeUrlLookupService::CanSendPa
+@@ -142,8 +137,7 @@ bool RealTimeUrlLookupService::CanSendPa
  }
  
  bool RealTimeUrlLookupService::CanIncludeSubframeUrlInReferrerChain() const {
@@ -4948,7 +4948,7 @@
  }
  
  bool RealTimeUrlLookupService::CanCheckSafeBrowsingDb() const {
-@@ -159,9 +153,7 @@ bool RealTimeUrlLookupService::CanCheckS
+@@ -160,9 +154,7 @@ bool RealTimeUrlLookupService::CanCheckS
  }
  
  bool RealTimeUrlLookupService::CanSendRTSampleRequest() const {
@@ -4959,7 +4959,7 @@
  }
  
  std::string RealTimeUrlLookupService::GetUserEmail() const {
-@@ -262,14 +254,6 @@ RealTimeUrlLookupService::GetMinAllowedT
+@@ -261,14 +253,6 @@ RealTimeUrlLookupService::GetMinAllowedT
  
  void RealTimeUrlLookupService::MaybeLogLastProtegoPingTimeToPrefs(
      bool sent_with_token) {

@@ -33,7 +33,7 @@
      "net/cert_verifier_service_time_updater.cc",
      "net/cert_verifier_service_time_updater.h",
      "net/chrome_mojo_proxy_resolver_factory.cc",
-@@ -3484,10 +3480,6 @@ static_library("browser") {
+@@ -3487,10 +3483,6 @@ static_library("browser") {
    } else {
      #!is_android
      sources += [
@@ -44,7 +44,7 @@
        "accessibility/caption_bubble_context_browser.h",
        "accessibility/embedded_a11y_extension_loader.cc",
        "accessibility/embedded_a11y_extension_loader.h",
-@@ -4225,10 +4217,6 @@ static_library("browser") {
+@@ -4228,10 +4220,6 @@ static_library("browser") {
        "//chrome/browser/on_device_translation:prefs",
        "//chrome/browser/policy:path_parser",
        "//chrome/browser/resources:component_extension_resources",
@@ -55,7 +55,7 @@
        "//chrome/browser/search/background",
        "//chrome/browser/smart_card",
        "//chrome/browser/task_manager",
-@@ -4352,9 +4340,6 @@ static_library("browser") {
+@@ -4355,9 +4343,6 @@ static_library("browser") {
        "//components/webauthn/core/browser:passkey_model",
        "//services/device/public/cpp/bluetooth",
        "//services/device/public/cpp/hid",
@@ -65,7 +65,7 @@
        "//third_party/crashpad/crashpad/client:common",
        "//third_party/zxcvbn-cpp",
        "//ui/views",
-@@ -4443,8 +4428,6 @@ static_library("browser") {
+@@ -4446,8 +4431,6 @@ static_library("browser") {
      #!is_android
      if (!is_chromeos) {
        sources += [
@@ -74,7 +74,7 @@
          "device_notifications/device_status_icon_renderer.cc",
          "device_notifications/device_status_icon_renderer.h",
          "external_protocol/auto_launch_protocols_policy_handler.cc",
-@@ -4461,8 +4444,6 @@ static_library("browser") {
+@@ -4464,8 +4447,6 @@ static_library("browser") {
          "policy/chrome_browser_cloud_management_register_watcher.h",
          "policy/file_selection_dialogs_policy_handler.cc",
          "policy/file_selection_dialogs_policy_handler.h",
@@ -83,7 +83,7 @@
          "usb/usb_status_icon.cc",
          "usb/usb_status_icon.h",
        ]
-@@ -5186,7 +5167,6 @@ static_library("browser") {
+@@ -5189,7 +5170,6 @@ static_library("browser") {
        "//chrome/browser/policy:onc",
        "//chrome/browser/push_notification:push_notification",
        "//chrome/browser/resources:app_icon_resources",
@@ -91,7 +91,7 @@
        "//chrome/browser/support_tool/ash",
        "//chrome/browser/ui/ash/accelerator",
        "//chrome/browser/ui/ash/accessibility",
-@@ -5408,7 +5388,6 @@ static_library("browser") {
+@@ -5411,7 +5391,6 @@ static_library("browser") {
        "//components/webapk:proto",
        "//device/vr/public/mojom:isolated_xr_service",
        "//remoting/host/chromeos:features",
@@ -99,7 +99,7 @@
        "//third_party/nearby:rpc_resources_proto",
        "//third_party/nearby:wire_format_proto",
        "//ui/chromeos",
-@@ -8010,22 +7989,6 @@ static_library("browser") {
+@@ -8013,22 +7992,6 @@ static_library("browser") {
      }
    }
  
@@ -724,7 +724,7 @@
        "//services/service_manager/public/cpp",
        "//services/strings",
        "//services/test/echo/public/mojom",
-@@ -7741,7 +7735,6 @@ test("unit_tests") {
+@@ -7742,7 +7736,6 @@ test("unit_tests") {
  
      # Non-android deps for "unit_tests" target.
      deps += [
@@ -732,7 +732,7 @@
        "//chrome:packed_resources_integrity_header",
        "//chrome/browser/apps:icon_standardizer",
        "//chrome/browser/apps/app_service",
-@@ -7892,7 +7885,6 @@ test("unit_tests") {
+@@ -7893,7 +7886,6 @@ test("unit_tests") {
        "//services/device/public/cpp/bluetooth",
        "//services/metrics/public/cpp:ukm_builders",
        "//services/network:test_support",
@@ -740,7 +740,7 @@
        "//services/video_effects/test:test_support",
        "//third_party/crashpad/crashpad/util",
        "//third_party/libaddressinput",
-@@ -8334,7 +8326,6 @@ test("unit_tests") {
+@@ -8335,7 +8327,6 @@ test("unit_tests") {
        "//chrome/browser/nearby_sharing/contacts:unit_tests",
        "//chrome/browser/nearby_sharing/local_device_data:unit_tests",
        "//chrome/browser/policy:unit_tests",

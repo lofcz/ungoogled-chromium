@@ -276,7 +276,7 @@
  namespace blink {
  
  class DOMMatrixInit;
-@@ -3618,8 +3621,22 @@ TextMetrics* BaseRenderingContext2D::mea
+@@ -3608,8 +3611,22 @@ TextMetrics* BaseRenderingContext2D::mea
    const CanvasRenderingContext2DState& state = GetState();
    TextDirection direction = ToTextDirection(state.GetDirection(), canvas);
  
@@ -303,7 +303,7 @@
  void BaseRenderingContext2D::SnapshotStateForFilter() {
 --- a/third_party/blink/renderer/platform/BUILD.gn
 +++ b/third_party/blink/renderer/platform/BUILD.gn
-@@ -1762,6 +1762,7 @@ component("platform") {
+@@ -1764,6 +1764,7 @@ component("platform") {
      "//components/paint_preview/common",
      "//components/search_engines:search_engine_utils",
      "//components/translate/core/language_detection:language_detection",
